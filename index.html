@@ -7,21 +7,8 @@
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #000;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255,215,0,0.3);
-      border-top-color: #FFD700;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
+    body { background: #000; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,215,0,0.3); border-top-color: #FFD700; border-radius: 50%; animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
@@ -34,38 +21,31 @@
 
   liff.init({ liffId: LIFF_ID }).then(async () => {
     try {
-      const result = await liff.shareTargetPicker(
-        [
-          {
-            type: "flex",
-            altText: "鑫富翁 - 分享好友夥伴！零門檻被動收入",
-            contents: {
-              type: "bubble",
-              size: "giga",
-              body: {
-                type: "box",
-                layout: "vertical",
-                contents: [
-                  {
-                    type: "image",
-                    url: BANNER_IMAGE_URL,
-                    size: "full",
-                    aspectRatio: "16:9",
-                    aspectMode: "cover",
-                    action: {
-                      type: "uri",
-                      label: "立即前往",
-                      uri: PLATFORM_URL
-                    }
-                  }
-                ],
-                paddingAll: "0px"
+      const result = await liff.shareTargetPicker([{
+        type: "flex",
+        altText: "鑫富翁 - 分享好友夥伴！零門檻被動收入",
+        contents: {
+          type: "bubble",
+          size: "giga",
+          body: {
+            type: "box",
+            layout: "vertical",
+            contents: [{
+              type: "image",
+              url: BANNER_IMAGE_URL,
+              size: "full",
+              aspectRatio: "16:9",
+              aspectMode: "cover",
+              action: {
+                type: "uri",
+                label: "立即前往",
+                uri: PLATFORM_URL
               }
-            }
+            }],
+            paddingAll: "0px"
           }
-        ],
-        { isMultiple: true }
-      );
+        }
+      }], { isMultiple: true });
       liff.closeWindow();
     } catch (err) {
       window.location.href = PLATFORM_URL;
