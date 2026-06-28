@@ -3,126 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>鑫富翁 - 分享好友</title>
+  <title>鑫富翁</title>
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 50%, #1a0a00 100%);
+      background: #000;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: 'Arial', sans-serif;
-      color: #fff;
     }
-    .logo {
-      font-size: 2rem;
-      font-weight: 900;
-      color: #FFD700;
-      text-shadow: 0 0 20px rgba(255,215,0,0.8), 2px 2px 4px #000;
-      margin-bottom: 8px;
-      letter-spacing: 2px;
-    }
-    .subtitle {
-      color: #FFA500;
-      font-size: 0.9rem;
-      margin-bottom: 30px;
-      opacity: 0.8;
-    }
-    .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,215,0,0.3);
-      border-radius: 16px;
-      padding: 30px 24px;
-      width: 88vw;
-      max-width: 360px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
-    .icon {
-      font-size: 3rem;
-      margin-bottom: 12px;
-      animation: bounce 1.5s infinite;
-    }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .card h2 {
-      font-size: 1.3rem;
-      color: #FFD700;
-      margin-bottom: 8px;
-    }
-    .card p {
-      font-size: 0.85rem;
-      color: #ccc;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-    .btn-share {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, #FFD700, #FFA500);
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: #1a0a00;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(255,165,0,0.5);
-      transition: transform 0.15s, box-shadow 0.15s;
-      letter-spacing: 1px;
-    }
-    .btn-share:active {
-      transform: scale(0.97);
-      box-shadow: 0 2px 10px rgba(255,165,0,0.3);
-    }
-    .btn-share:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .status {
-      margin-top: 16px;
-      font-size: 0.8rem;
-      color: #aaa;
-      min-height: 20px;
-    }
-    .status.success { color: #4CAF50; }
-    .status.error { color: #f44336; }
-    .divider {
-      border: none;
-      border-top: 1px solid rgba(255,215,0,0.2);
-      margin: 20px 0;
-    }
-    .visit-btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: transparent;
-      border: 1px solid rgba(255,215,0,0.5);
-      border-radius: 50px;
-      font-size: 0.9rem;
-      color: #FFD700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .visit-btn:hover {
-      background: rgba(255,215,0,0.1);
-    }
-    .loading-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-    }
-    .loading-overlay.show { display: flex; }
     .spinner {
       width: 40px;
       height: 40px;
@@ -135,66 +26,14 @@
   </style>
 </head>
 <body>
-
-<div class="loading-overlay" id="loading">
   <div class="spinner"></div>
-</div>
-
-<div class="logo">🎰 鑫富翁</div>
-<div class="subtitle">XFWWIN · 零門檻被動收入</div>
-
-<div class="card">
-  <div class="icon">🤝</div>
-  <h2>分享好友，一起賺！</h2>
-  <p>點擊下方按鈕，將鑫富翁分享給你的好友<br>好友加入後，你將獲得被動收益！</p>
-
-  <button class="btn-share" id="shareBtn" onclick="doShare()">
-    💰 立即分享給好友
-  </button>
-  <div class="status" id="statusMsg"></div>
-
-  <hr class="divider">
-
-  <a class="visit-btn" href="https://xfw-win.vip/" target="_blank">
-    🎮 直接前往平台
-  </a>
-</div>
-
 <script>
-  // =====================================================
-  // ⚙️ 請修改以下兩個設定
-  // =====================================================
-  const LIFF_ID = "請填入你的LIFF_ID";
-  // GitHub Pages 部署後，圖片網址格式如下：
-  // https://你的GitHub帳號.github.io/xfwwin-share/banner.png
-  const BANNER_IMAGE_URL = "https://請填入GitHub帳號.github.io/xfwwin-share/banner.png";
+  const LIFF_ID = "2010535961-1dej8Jmh";
+  const BANNER_IMAGE_URL = "https://xinfuweng.github.io/xfwwin-share/banner.png";
   const PLATFORM_URL = "https://xfw-win.vip/";
-  // =====================================================
 
-  const shareBtn = document.getElementById("shareBtn");
-  const statusMsg = document.getElementById("statusMsg");
-  const loading = document.getElementById("loading");
-
-  liff.init({ liffId: LIFF_ID })
-    .then(() => console.log("LIFF 初始化成功"))
-    .catch(err => {
-      statusMsg.textContent = "⚠️ 請在 LINE 內開啟此頁面";
-      statusMsg.className = "status error";
-    });
-
-  async function doShare() {
-    shareBtn.disabled = true;
-    loading.classList.add("show");
-    statusMsg.textContent = "";
-
+  liff.init({ liffId: LIFF_ID }).then(async () => {
     try {
-      if (!liff.isApiAvailable("shareTargetPicker")) {
-        window.open(PLATFORM_URL, "_blank");
-        statusMsg.textContent = "請在 LINE 內開啟此頁面以分享好友";
-        statusMsg.className = "status error";
-        return;
-      }
-
       const result = await liff.shareTargetPicker(
         [
           {
@@ -205,23 +44,13 @@
         ],
         { isMultiple: true }
       );
-
-      if (result) {
-        statusMsg.textContent = "✅ 分享成功！感謝你的推薦";
-        statusMsg.className = "status success";
-      } else {
-        statusMsg.textContent = "已取消分享";
-        statusMsg.className = "status";
-      }
+      liff.closeWindow();
     } catch (err) {
-      statusMsg.textContent = "❌ 分享失敗，請重試";
-      statusMsg.className = "status error";
-    } finally {
-      shareBtn.disabled = false;
-      loading.classList.remove("show");
+      window.location.href = PLATFORM_URL;
     }
-  }
+  }).catch(() => {
+    window.location.href = PLATFORM_URL;
+  });
 </script>
-
 </body>
 </html>
