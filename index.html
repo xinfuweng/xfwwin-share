@@ -37,9 +37,32 @@
       const result = await liff.shareTargetPicker(
         [
           {
-            type: "image",
-            originalContentUrl: BANNER_IMAGE_URL,
-            previewImageUrl: BANNER_IMAGE_URL
+            type: "flex",
+            altText: "鑫富翁 - 分享好友夥伴！零門檻被動收入",
+            contents: {
+              type: "bubble",
+              body: {
+                type: "box",
+                layout: "vertical",
+                contents: [],
+                paddingAll: "0px"
+              },
+              hero: {
+                type: "image",
+                url: BANNER_IMAGE_URL,
+                size: "full",
+                aspectRatio: "20:13",
+                aspectMode: "cover",
+                action: {
+                  type: "uri",
+                  label: "立即前往",
+                  uri: PLATFORM_URL
+                }
+              },
+              styles: {
+                body: { backgroundColor: "#000000" }
+              }
+            }
           }
         ],
         { isMultiple: true }
