@@ -41,26 +41,25 @@
             altText: "鑫富翁 - 分享好友夥伴！零門檻被動收入",
             contents: {
               type: "bubble",
+              size: "giga",
               body: {
                 type: "box",
                 layout: "vertical",
-                contents: [],
+                contents: [
+                  {
+                    type: "image",
+                    url: BANNER_IMAGE_URL,
+                    size: "full",
+                    aspectRatio: "16:9",
+                    aspectMode: "cover",
+                    action: {
+                      type: "uri",
+                      label: "立即前往",
+                      uri: PLATFORM_URL
+                    }
+                  }
+                ],
                 paddingAll: "0px"
-              },
-              hero: {
-                type: "image",
-                url: BANNER_IMAGE_URL,
-                size: "full",
-                aspectRatio: "20:13",
-                aspectMode: "cover",
-                action: {
-                  type: "uri",
-                  label: "立即前往",
-                  uri: PLATFORM_URL
-                }
-              },
-              styles: {
-                body: { backgroundColor: "#000000" }
               }
             }
           }
